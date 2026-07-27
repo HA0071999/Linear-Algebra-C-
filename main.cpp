@@ -8,7 +8,7 @@ using namespace std;
 class Matrix{
     public:
     int rows; int columns;
-    vector<vector<double>> matrix; 
+    vector<vector<double> > matrix; 
 
      Matrix(int row, int col){
         rows=row;
@@ -17,7 +17,7 @@ class Matrix{
     }
 
     string size_matrix(){
-        string msize = to_string(rows) + "x" + to_string(columns);
+        string msize = (rows) + "x" + (columns);
         return msize;
     }
 
