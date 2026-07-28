@@ -358,12 +358,14 @@ class LinearSystem {
     //variables = n,  equations = e
     LinearSystem(int n, int e): variables(n),equations(e), coefficients(e,n), constants(e,1) {}
 
-    void input(){
+    void input_linear_system(){
         cout << "Enter the coefficients:\n";
         cin >> coefficients;
         cout << "Enter the constants:\n";
         cin >> constants;
+        cout<<coefficients<<" = "<<constants<<"\n";
     }
+
     Matrix solve_using_inverse(){
         if (variables!=equations) {throw logic_error("Must be square matrix. Use solve with Gaussian eliminations ");}
         return coefficients.inverse() *constants;
