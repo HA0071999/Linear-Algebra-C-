@@ -16,6 +16,14 @@ class Matrix{
         matrix.resize(rows, vector<double>(columns));
     }
 
+    private:
+    int getRows() const{
+        return rows;
+    }
+
+    int getColumns() const{
+        return columns;
+    }
     string size_matrix(){
         string msize = (rows) + "x" + (columns);
         return msize;
@@ -250,6 +258,7 @@ class Matrix{
     //scalar multiplicatin- double*matrix
     friend Matrix operator*(const double scalar, Matrix& m1);
 
+    friend class LinearSystem;
 };
 
 //returns true if two matrices are equal. Otherwise returns false
