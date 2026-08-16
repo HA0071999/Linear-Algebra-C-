@@ -36,7 +36,11 @@ detN(): double, Calculates the determinant and prints step-by-step Gaussian elim
 
 inverse(): Matrix, Computes the inverse of the matrix; throws a logic_error if singular or non-square.
 
-commute(m1, m2), bool, Returns true if the provided matrices satisfy the commutative property ($A \times B = B \times A$).
+commute(m1, m2): bool, Returns true if the provided matrices satisfy the commutative property ($A \times B = B \times A$).
+
+tr(): double, Returns the trace of the matrix, throws logic_error if not square.
+
+transpose(): Matrix, Returns the transpose matrix
 
 
 
