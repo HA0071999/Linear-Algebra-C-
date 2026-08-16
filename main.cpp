@@ -7,17 +7,17 @@ using namespace std;
 
 class LinearSystem;
 class Matrix{
-    public:
+ 
     int rows; int columns;
     vector<vector<double> > matrix; 
-
+    public:
      Matrix(int row, int col){
         rows=row;
         columns=col;
         matrix.resize(rows, vector<double>(columns));
     }
 
-    private:
+    //getters and setters
     int getRows() const{
         return rows;
     }
