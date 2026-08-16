@@ -5,6 +5,7 @@
 #include <cmath>
 using namespace std;
 
+class LinearSystem;
 class Matrix{
     public:
     int rows; int columns;
