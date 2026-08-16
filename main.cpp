@@ -237,6 +237,9 @@ class Matrix{
     }
     //to find the trace (sum of all entries along main diagonal
     double tr(){
+        if (check_if_squareMatrix()==false) {
+            throw logic_error("Inverse only exists when matrix is a square matrix. ");
+        }
         double trace=0;
         for (int i=0; i<rows; i++){
             for (int j=0; j<columns; j++){
