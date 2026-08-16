@@ -139,6 +139,9 @@ class Matrix{
  
     //finding the determinant as it's own seperate function + AND DISPLAYS STEPS
     double detN(){
+        if (check_if_squareMatrix()==false) {
+            throw logic_error("Determinant only exists when matrix is a square matrix. ");
+        }
         Matrix m1 = *this;
         //Pivitosiation  //if any elements in the row beloware greater than the row above, swap
         int sign=1;
@@ -238,7 +241,7 @@ class Matrix{
     //to find the trace (sum of all entries along main diagonal
     double tr(){
         if (check_if_squareMatrix()==false) {
-            throw logic_error("Inverse only exists when matrix is a square matrix. ");
+            throw logic_error("Trace only exists when matrix is a square matrix. ");
         }
         double trace=0;
         for (int i=0; i<rows; i++){
