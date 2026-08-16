@@ -235,6 +235,16 @@ class Matrix{
         return I;
     
     }
+    //to find the trace (sum of all entries along main diagonal
+    double tr(){
+        double trace=0;
+        for (int i=0; i<rows; i++){
+            for (int j=0; j<columns; j++){
+                if (i==j) { trace+=matrix[i][j]; }
+            }
+        }
+        return trace;
+    }
 
     //checks if two matrices are equal
     friend bool operator==(const Matrix& m1, const Matrix& m2);
