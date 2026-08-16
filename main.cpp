@@ -252,6 +252,17 @@ class Matrix{
         return trace;
     }
 
+    //returns the transpose matrix
+    Matrix transpose(){
+        Matrix result(columns, rows);
+
+        for (int i = 0; i <rows; i++)
+            for (int j = 0; j<columns; j++)
+                result[j][i] = matrix[i][j];
+
+        return result;
+    }
+
     //checks if two matrices are equal
     friend bool operator==(const Matrix& m1, const Matrix& m2);
 
