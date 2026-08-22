@@ -28,7 +28,11 @@ identity(): void, Transforms the current matrix into an identity matrix.
 
 zero_maatrix(); void, Transforms the current matrix into a zero matrix.
 
-check_if_squareMatrix(): bool, Returns true if the number of rows equals the number of columns.
+isSquare(): bool, Returns true if the number of rows equals the number of columns.
+
+isIdentity(): bool, Returns true if the matrix is an identity matrix, otherwise returns false.
+
+isSymmetric(): bool, Returns true if the matrix is symmetric (matrix and it's transpose are equal matrices)/
 
 determinant(): double, Calculates and returns the determinant of a square matrix.
 
