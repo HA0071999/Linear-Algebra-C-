@@ -25,6 +25,44 @@ class Matrix{
     int getColumns() const{
         return columns;
     }
+
+
+   private:
+    //checks if matrix a square matrix (nxn)
+    bool isSquare() const {
+        if (rows==columns){
+            return true;
+        }
+        else { return false; }
+    }
+    //checks if matrix is a square matrix
+    bool isIdentity() const {
+        if (isSquare()==false)
+        {return false;}
+        for (int i = 0; i <rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                    if (i == j && matrix[i][j] != 1)
+                        return false;
+                    if (i != j && matrix[i][j] != 0)
+                        return false;
+                }
+            }
+        return true;
+    }
+
+    //check if matrix is symmetric
+    bool isSymmetric() const {
+        if (isSquare()==false) {return false;}
+        for (int i = 0; i < rows; i++) {
+            for (int j = i + 1; j< columns; j++) {
+                if (matrix[i][j] != matrix[j][i])
+                    return false;
+                }
+        }
+        return true;
+    }
+    
+    public:
     string size_matrix(){
         string msize = (rows) + "x" + (columns);
         return msize;
@@ -75,16 +113,10 @@ class Matrix{
         return matrix[row];
     }
 
-    bool check_if_squareMatrix(){
-        //checking if its a square matrix (nxn)
-        if (rows==columns){
-            return true;
-        }
-        else { return false; }
-    }
+    
    double determinant(){
         //cannot find determinant if not square matrix
-        if (check_if_squareMatrix()!=true){ throw logic_error("Cannot compute detrminant of a non-square matrix. "); }
+        if (isSquare()!=true){ throw logic_error("Cannot compute detrminant of a non-square matrix. "); }
             switch (rows){
                 case 1:
                 //if (1x1) matrix, det is just the entry itself
@@ -139,7 +171,7 @@ class Matrix{
  
     //finding the determinant as it's own seperate function + AND DISPLAYS STEPS
     double detN(){
-        if (check_if_squareMatrix()==false) {
+        if (isSquare()==false) {
             throw logic_error("Determinant only exists when matrix is a square matrix. ");
         }
         Matrix m1 = *this;
@@ -191,7 +223,7 @@ class Matrix{
 
     //computing the inverse matrix + DISPLAYING STEPS
     Matrix inverse(){
-        if (check_if_squareMatrix()==false) {
+        if (isSquare()==false) {
             throw logic_error("Inverse only exists when matrix is a square matrix. ");
         }
         Matrix m1 = *this;
@@ -240,7 +272,7 @@ class Matrix{
     }
     //to find the trace (sum of all entries along main diagonal
     double tr(){
-        if (check_if_squareMatrix()==false) {
+        if (isSquare()==false) {
             throw logic_error("Trace only exists when matrix is a square matrix. ");
         }
         double trace=0;
