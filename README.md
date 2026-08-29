@@ -46,6 +46,7 @@ tr(): double, Returns the trace of the matrix, throws logic_error if not square.
 
 transpose(): Matrix, Returns the transpose matrix
 
+Rank(): int, Returns rank of a matrix, (number of linearly independent rows and columns). 
 
 
 LinearSystem(n, e): Sets up a system with n variables and e equations.
