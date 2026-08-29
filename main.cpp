@@ -295,6 +295,47 @@ class Matrix{
         return result;
     }
 
+    //returns rank of matrix by converting it into row echelon form and counts the non-zero rows
+    int Rank(){
+            Matrix temp = *this;
+            // Pivotisation
+            for (int i = 0; i < rows; i++){
+                int pivot = i;
+                for (int j = i + 1; j < rows; j++){
+                    if (fabs(temp[j][i]) > fabs(temp[pivot][i])){
+                        pivot = j;
+                    }
+                }
+                if (pivot != i){
+                    swap(temp.matrix[i], temp.matrix[pivot]);
+                }
+            }
+            // Gaussian elimination
+            for (int i = 0; i < rows; i++){
+                if (fabs(temp[i][i]) < 1e-12)
+                    continue;
+                for (int k = i + 1; k < rows; k++){
+                    double t = temp[k][i] / temp[i][i];
+                    for (int j = i; j < columns; j++){
+                        temp[k][j] -= t * temp[i][j];
+                    }
+                }
+            }
+
+            // Count non-zero rows
+            int rank = 0;
+            for (int i = 0; i < rows; i++){
+                for (int j = 0; j < columns; j++){
+                    if (fabs(temp[i][j]) > 1e-12){
+                        rank++;
+                        break;
+                    }
+                }
+            }
+
+            return rank;
+    }
+
     //checks if two matrices are equal
     friend bool operator==(const Matrix& m1, const Matrix& m2);
 
