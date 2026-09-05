@@ -92,14 +92,17 @@ class Matrix{
             matrix[i][i] = 1;
     }
 
-    //to create a zero matrix
-    void zero_matrix(){
+    //to fill a matrix
+    Matrix fill(double d){
+        Matrix m = *this;
         for (int i =0 ; i<rows; i++) {
             for (int j=0; j<columns; j++){
-                matrix[i][j]=0;
+                m[i][j]=d;
             }
         }
+        return m;
     }
+
 
     //cout and cin for output and input of matrices 
     friend ostream& operator<<(ostream& os, const Matrix& m1);
