@@ -34,6 +34,8 @@ isIdentity(): bool, Returns true if the matrix is an identity matrix, otherwise 
 
 isSymmetric(): bool, Returns true if the matrix is symmetric (matrix and it's transpose are equal matrices)/
 
+swap_rows(int rows 1, int row 2): void, Swaps row 1 and row 2.
+
 determinant(): double, Calculates and returns the determinant of a square matrix.
 
 detN(): double, Calculates the determinant and prints step-by-step Gaussian elimination stages to the console.
