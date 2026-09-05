@@ -26,7 +26,7 @@ size_matrix(): string, Returns a string representation of the matrix dimensions 
 
 identity(): void, Transforms the current matrix into an identity matrix.
 
-zero_maatrix(); void, Transforms the current matrix into a zero matrix.
+fill(double d); Matrix, fills every entry in the matrix with the double d.
 
 isSquare(): bool, Returns true if the number of rows equals the number of columns.
 
