@@ -133,98 +133,117 @@ class Matrix{
                 return matrix[0][0]*matrix[1][1] - matrix[1][0]*matrix[0][1]; break;
 
                 default: 
-                        //Pivitosiation
-                int sign=1;
-                for(int i=0; i<rows; i++){
-                    int pivot=i;
-                    for(int j=i+1; j<rows; j++){
-                        if ( fabs(matrix[j][i])>fabs(matrix[pivot][i]) ){
+                int sign = 1;
 
-                            pivot=j; 
-
-                            if(pivot != i){sign *= -1;}
-                            for(int k=0; k<rows; k++){
-                                double temp = matrix[i][k];
-                                matrix[i][k]= matrix[j][k];
-                                matrix[j][k]=temp;
-                            }
-
+                // Partial pivoting
+                for(int i = 0; i < rows; i++){
+                    int pivot = i;
+                    //Find largest value in this column
+                    for(int j = i + 1; j < rows; j++){
+                        if(fabs(matrix[j][i]) >
+                        fabs(matrix[pivot][i])){
+                            pivot = j;
                         }
                     }
 
-                }
-                
-                for (int i=0; i<rows; i++){
-                    for (int k=i+1; k<rows; k++){
-                        if (matrix[i][i]<1e-12){return 0;}
-                        double t= matrix[k][i]/matrix[i][i];
-                        for (int j=i; j<columns; j++){
-                            matrix[k][j]=matrix[k][j]-t*matrix[i][j];
-                        } 
+                    // If entire pivot column is zero
+                    if(fabs(matrix[pivot][i]) < 1e-12)
+                        return 0;
+
+                    //swap once
+                    if(pivot != i){
+                        swap_rows(i, pivot);
+                        sign *= -1;
+                    
                     }
                 }
+
+                // Gaussian elimination
+                for(int i = 0; i < rows; i++){
+                    if(fabs(matrix[i][i]) < 1e-12)
+                        return 0;
+
+                    for(int k = i + 1; k < rows; k++){
+                        double t =matrix[k][i] /
+                            matrix[i][i];
+
+                        for(int j = i; j < columns; j++){
+                            matrix[k][j] -=
+                                t * matrix[i][j];
+                        }
+
                 
-                
-                //find the determinant
-                double det=sign;
-                for(int i=0;i<rows; i++)
-                        det *= matrix[i][i];
-                        return det;
                     }
+                }
+
+
+                //det =  Product of diagonal
+                double det = sign;
+                for(int i = 0; i < rows; i++){
+                    det *= matrix[i][i];
+                    cout<<endl<<det;
+                }
+                return det;
+            }
     
-        
-        
     }
  
     //finding the determinant as it's own seperate function + AND DISPLAYS STEPS
     double detN(){
-        if (isSquare()==false) {
-            throw logic_error("Determinant only exists when matrix is a square matrix. ");
+        if (!isSquare()) {
+            throw logic_error(
+                "Determinant only exists for square matrices."
+            );
         }
         Matrix m1 = *this;
-        //Pivitosiation  //if any elements in the row beloware greater than the row above, swap
-        int sign=1;
-        for(int i=0; i<m1.rows; i++){
-            int pivot=i;
-            for(int j=i+1; j<m1.rows; j++){
-                if ( fabs(m1.matrix[j][i])>fabs(m1.matrix[pivot][i]) ){
-                    pivot=j; 
-        
-                    if(pivot != i){sign *= -1;}
-                    for(int k=0; k<m1.rows; k++){
-                        
-                        double temp = m1.matrix[i][k];
-                        m1.matrix[i][k]= m1.matrix[j][k];
-                        m1.matrix[j][k]=temp;
-                        
-                    }
-                    cout<<"Swapped R"<<i+1<<" and R"<<j+1<<endl<<m1<<endl;
+        int sign = 1;
+
+        // Partial pivoting
+        for(int i = 0; i < m1.rows; i++){
+            int pivot = i;
+            //find largest value in this column
+            for(int j = i + 1; j < m1.rows; j++){
+                if(fabs(m1.matrix[j][i]) >
+                fabs(m1.matrix[pivot][i])){
+                    pivot = j;
                 }
             }
-        }
-    
-        /* Gaussian Eiminataion
-        i: pivot row
-        k: rows below the pivot
-        j: columns in the row being updated*/
-        //make the elements below the pivot elements equal 0 or eliminate the variables
-        
-        for (int i=0; i<m1.rows; i++){
-            for (int k=i+1; k<m1.rows; k++){
-                if (m1.matrix[i][i]<1e-12){return 0;}
-                double t= m1.matrix[k][i]/m1.matrix[i][i];
-                for (int j=i; j<m1.columns; j++){
-                    m1.matrix[k][j]=m1.matrix[k][j]-t*m1.matrix[i][j];
-                    cout<<"R"<<k+1<<" = R"<<k+1<<" - "<<t<<"*R"<<i+1<<endl<<m1<<endl;
-                } 
+
+            // If entire pivot column is zero
+            if(fabs(m1.matrix[pivot][i]) < 1e-12)
+                return 0;
+
+            //swap once
+            if(pivot != i){
+                m1.swap_rows(i, pivot);
+                sign *= -1;
+                cout << "Swapped R"<< i + 1<< " and R"<< pivot + 1<< endl<< m1 << endl;
             }
         }
-        
-        //find the determinant
-        double det=sign;
-        for(int i=0;i<m1.rows; i++)
+
+        //Gaussian elimination
+        for(int i = 0; i < m1.rows; i++){
+            if(fabs(m1.matrix[i][i]) < 1e-12)
+                return 0;
+
+            for(int k = i + 1; k < m1.rows; k++){
+                double t =m1.matrix[k][i] /
+                    m1.matrix[i][i];
+
+                for(int j = i; j < m1.columns; j++){
+                    m1.matrix[k][j] -=
+                        t * m1.matrix[i][j];
+                }
+
+                cout << "R" << k + 1<< " = R" << k + 1<< " - " << t<< "*R" << i + 1<< endl<< m1<< endl;
+            }
+        }
+        // det = Product of diagonal
+        double det = sign;
+        for(int i = 0; i < m1.rows; i++){
             det *= m1.matrix[i][i];
-        cout<<"det="<<det;
+            cout<<endl<<det;
+        }
         return det;
     }
 
