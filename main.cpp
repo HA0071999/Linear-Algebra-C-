@@ -116,7 +116,11 @@ class Matrix{
         return matrix[row];
     }
 
-    
+   //swap rows
+    void swap_rows(int r1, int r2) {
+        swap(matrix[r1], matrix[r2]);
+    }
+
    double determinant(){
         //cannot find determinant if not square matrix
         if (isSquare()!=true){ throw logic_error("Cannot compute detrminant of a non-square matrix. "); }
