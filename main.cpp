@@ -121,6 +121,36 @@ class Matrix{
         swap(matrix[r1], matrix[r2]);
     }
 
+   //gaussian elimination
+   void gaussian_elimination(){
+        Matrix m =*this;
+        // Partial pivoting
+        for(int i = 0; i < rows; i++){
+             int pivot = i;
+             // Find largest value in this column
+             for(int j = i + 1; j < rows; j++){
+                   if(fabs(m[j][i]) > fabs(m[pivot][i])){
+                        pivot = j;
+                        }
+                    }
+                    //swap once
+                    if(pivot != i){
+                        swap_rows(i, pivot);
+                    }
+                // Gaussian elimination
+             
+                    for(int k = i + 1; k < rows; k++){
+                        double t =m[k][i] /
+                            m[i][i];
+
+                        for(int j = i; j < columns; j++){
+                            m[k][j] -=
+                                t * matrix[i][j];
+                        }
+                }
+            }
+    }
+
    double determinant(){
         //cannot find determinant if not square matrix
         if (isSquare()!=true){ throw logic_error("Cannot compute detrminant of a non-square matrix. "); }
