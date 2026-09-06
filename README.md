@@ -36,6 +36,8 @@ isSymmetric(): bool, Returns true if the matrix is symmetric (matrix and it's tr
 
 swap_rows(int rows 1, int row 2): void, Swaps row 1 and row 2.
 
+gaussian_elimination(): void, performs gaussian elimination on a matrix. Reduces it to REF.
+
 determinant(): double, Calculates and returns the determinant of a square matrix.
 
 detN(): double, Calculates the determinant and prints step-by-step Gaussian elimination stages to the console.
